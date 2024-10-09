@@ -1,5 +1,5 @@
 [package]
-name = "MicroInsuranceSystem"
+name = "RentalAgreement"
 version = "0.0.0"
 
 [dependencies]
