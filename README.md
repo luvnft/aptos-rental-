@@ -1,131 +1,132 @@
-# Micro-Insurance System - Frontend
+## RentalAgreement Smart Contract
 
-This is the frontend for the **Micro-Insurance System** built on the **Aptos Blockchain**. The platform enables users to purchase micro-insurance policies, request claims, and receive payouts, with all actions securely managed via smart contracts.
+This module provides a decentralized solution for rental agreements, including rent payments, security deposits, and deductions for damages. It is built on the Aptos blockchain and allows landlords and tenants to manage their agreements securely through smart contracts.
 
-## Key Features
+### Key Features:
 
-- **View Available Policies**: Users can browse through a list of pre-created insurance policies available for purchase.
-- **Purchase Insurance Policies**: Users can purchase micro-insurance policies directly using Aptos native token (**APT**).
-- **Claim Requests**: Users can request insurance claims after purchasing a policy.
-- **Claim Verification**: Claims are reviewed and verified by policy creators.
-- **Payouts**: Verified claims trigger payouts of the specified claimable amount directly to the user.
-- **Policy Management**: Policy creators can view and manage policies and verify customer claims.
+- Create rental agreements with specified terms like rent, security deposits, and duration.
+- Tenants can make rent payments, and landlords can track them.
+- Deductions for damages can be proposed by the landlord and approved by the tenant.
+- Security deposits are managed within the contract and refunded after deductions are approved.
+- View rental agreements and related details such as rent history, deductions, etc.
 
-## Prerequisites
+---
 
-Before running the project, ensure you have the following installed:
+## Module: `my_addrx::RentalAgreement`
 
-- **Node.js** (version 16 or higher)
-- **npm** or **yarn**
-- **Aptos Wallet** extension (e.g., Petra Wallet) for blockchain interactions
+### Dependencies:
 
-## Setup Instructions
+- **aptos_coin::AptosCoin**: For transferring rent payments and security deposits.
+- **signer**: To authorize transactions.
+- **vector**: To store multiple rental agreements, payments, and deductions.
+- **timestamp**: For managing time-sensitive elements of rental agreements.
+- **string::String**: To store textual information such as descriptions of agreements and damages.
 
-### 1. Clone the Repository
+### Constants:
 
-First, clone the project repository to your local machine:
+- Error codes such as `ERR_RENTAL_NOT_FOUND`, `ERR_UNAUTHORIZED`, `ERR_NO_ACTIVE_RENTALS`, etc., help manage different contract states and validation failures.
 
-```bash
-cd micro-insurance-system
-```
+### Structs:
 
-### 2. Install Dependencies
+- **`RentalAgreement`**: Represents a rental agreement with fields for landlord, tenant, rent, security deposit, duration, payments, and deductions.
+- **`RentPayment`**: Tracks the payment history for each rental agreement.
+- **`DamageDeduction`**: Logs deductions made for damages during the tenancy.
 
-Install the necessary dependencies for the project using **npm** or **yarn**:
+### Functions:
 
-```bash
-npm install
-```
+#### Public Entry Functions:
 
-or
+1. **`init_rental_system(account: &signer)`**: Initializes the rental system. It creates the global rental collection.
+2. **`create_rental_agreement(account: &signer, tenant: address, rent_amount: u64, security_deposit: u64, duration_months: u64, agreement_type: String, agreement_description: String)`**: Allows landlords to create a new rental agreement.
+3. **`make_security_deposit(account: &signer, rental_id: u64)`**: Tenants can make security deposits locked in the contract.
 
-```bash
-yarn install
-```
+4. **`pay_rent(account: &signer, rental_id: u64)`**: Allows tenants to pay rent for their active rental agreement.
 
-### 3. Configure Environment Variables
+5. **`propose_deductions(account: &signer, rental_id: u64, deduction_amount: u64, damage_description: String)`**: Landlord proposes deductions for damages.
 
-You need to configure the environment variables for the frontend to interact with the Aptos blockchain. Create a `.env` file in the project root and add the following variables:
+6. **`approve_deductions(account: &signer, rental_id: u64)`**: Tenant approves the deductions proposed by the landlord.
 
-```bash
-PROJECT_NAME=MicroInsuranceSystem
-VITE_APP_NETWORK=testnet
-VITE_MODULE_ADDRESS=0x<your_contract_address>
-```
+7. **`refund_security_deposit(account: &signer, rental_id: u64)`**: Refunds the remaining security deposit to the tenant after deductions.
 
-Adjust the `NODE_URL` and `FAUCET_URL` if you are using **Testnet** or **Mainnet** instead of Devnet.
+#### View Functions:
 
-### 4. Run the Development Server
+1. **`view_all_rentals()`**: Returns all the rental agreements.
+2. **`view_rental_by_id(rental_id: u64)`**: Returns a rental agreement by ID.
 
-Start the development server by running:
+3. **`view_rentals_by_landlord(landlord: address)`**: Lists all rental agreements created by a specific landlord.
 
-```bash
-npm run dev
-```
+4. **`view_rentals_by_tenant(tenant: address)`**: Lists all rental agreements a tenant is involved in.
 
-or
+5. **`view_active_rentals()`**: Lists all active (non-expired) rental agreements.
 
-```bash
-yarn run dev
-```
+6. **`view_rent_payment_history(rental_id: u64)`**: Shows the rent payment history for a specific rental agreement.
 
-The app will be available at `http://localhost:5173`.
+7. **`view_deductions(rental_id: u64)`**: Displays the damage deduction history for a rental agreement.
 
-## How to Use the Platform
+---
 
-### 1. Connect Wallet
+## Frontend Instructions
 
-Upon opening the application, you'll be prompted to connect your Aptos wallet (e.g., Petra Wallet). This allows you to interact with the blockchain and perform operations such as purchasing policies and requesting claims.
+The frontend for this Rental Agreement contract can be built using a React/TypeScript project integrated with the Aptos SDK for blockchain interactions.
 
-### 2. View Available Policies
+### Key Functionalities:
 
-Users can browse the **Policies** section to view the available insurance policies. Each policy will display details such as:
+1. **Connect Wallet**:
+   - Use the `Petra Wallet` adapter to connect a tenant's or landlord's wallet to the dApp.
+2. **Create Rental Agreement**:
 
-- Policy description
-- Premium amount
-- Maximum claimable amount
-- Type (e.g., health, auto)
-- Yearly or one-time payment options
+   - The landlord can fill in details like tenant address, rent, security deposit, and the contract duration, and submit the form to create a new rental agreement.
 
-### 3. Purchase Policy
+3. **Make Security Deposit**:
 
-To purchase an insurance policy:
+   - Tenants can view their agreements and make security deposits through the frontend interface.
 
-- Select the policy you want to purchase.
-- The platform will prompt you to pay the premium amount in **APT** via your connected Aptos wallet.
-- Once purchased, the policy will be added to your list of active policies.
+4. **Pay Rent**:
 
-### 4. Request Claim
+   - Rent payments can be made directly from the tenant’s wallet. The frontend will calculate and display the due amount and the current rent status.
 
-To request an insurance claim:
+5. **View Rental Details**:
 
-- Navigate to **My Policies** and select the policy you want to claim.
-- Click on **Request Claim**. The request will be submitted to the policy creator for verification.
+   - Both tenants and landlords can view details of active and past rental agreements, including payment history and damage deductions.
 
-### 5. Claim Verification and Payout
+6. **Propose Deductions**:
 
-For policy creators, after receiving a claim request:
+   - Landlords can propose deductions for damages, and tenants can view and approve these deductions.
 
-- Go to **Manage Policies** and select the relevant policy.
-- Review the claim request and click **Verify** if the claim is legitimate.
-- Once verified, the claim will be automatically paid out to the customer.
+7. **Refund Security Deposit**:
+   - Once the rental period is over, the tenant can request a security deposit refund after deductions.
 
-## Scripts
+### Tools and Libraries:
 
-- **`npm run dev`**: Starts the development server.
-- **`npm run build`**: Builds the project for production.
-- **`npm test`**: Runs unit tests.
+- **React (JavaScript/TypeScript)**: Framework for building the frontend UI.
+- **Aptos SDK**: To interact with the smart contract on the blockchain.
+- **Ant Design**: For UI components such as forms, modals, and buttons.
+- **Tailwind CSS**: For responsive styling.
 
-## Dependencies
+### Sample Pages:
 
-The project uses the following key dependencies:
+1. **Home Page**:
 
-- **React**: UI library for building user interfaces.
-- **TypeScript**: Typed superset of JavaScript for type-safe development.
-- **Aptos SDK**: JavaScript/TypeScript SDK to interact with the Aptos blockchain.
-- **Ant Design / Tailwind CSS**: For responsive UI design and layout.
-- **Petra Wallet Adapter**: To connect and interact with the Aptos wallet.
+   - Connect Wallet option.
+   - View active agreements.
 
-## Conclusion
+2. **Create Rental Agreement Page**:
 
-This frontend allows users to seamlessly interact with the **Micro-Insurance System**, providing a decentralized way to manage policies, request claims, and handle payouts. With a user-friendly interface and blockchain security, users and policy creators can manage their insurance needs transparently.
+   - Landlord can fill a form with rental agreement details and submit to the blockchain.
+
+3. **View Agreements**:
+   - Filter agreements based on the role (tenant or landlord).
+   - View all agreements created by a specific landlord or tenant.
+4. **Payment Page**:
+   - Tenant can view the agreement and pay rent securely using their Aptos wallet.
+5. **Deductions Page**:
+   - Landlord can propose deductions, and tenant can approve or reject them.
+
+---
+
+## Getting Started:
+
+1. Clone the project repository.
+2. Install dependencies: `npm install` or `yarn install`.
+3. Start the frontend development server: `npm start` or `yarn start`.
+4. Use the Aptos testnet to deploy and interact with the contract.

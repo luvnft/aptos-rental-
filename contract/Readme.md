@@ -1,121 +1,116 @@
-# MicroInsuranceSystem Smart Contract
+# Rental Agreement Smart Contract - README
 
 ## Overview
 
-This Move module provides a decentralized micro-insurance system, enabling users to purchase insurance policies, claim payouts, and manage insurance policies through smart contracts on the Aptos blockchain. The module features global storage for policies and includes essential insurance functionalities such as policy creation, premium payments, claim requests, verification, and payouts.
+The **Rental Agreement Smart Contract** is designed to facilitate secure and transparent rental agreements between landlords and tenants on the Aptos blockchain. The contract enables the creation, management, and completion of rental agreements while handling rental payments, security deposits, and damage deductions.
 
-## Key Features
+## Features
 
-- **Global Policy Management**: Stores all policies under a single global address.
-- **Policy Creation**: Allows creators to issue new policies with parameters like premium amount, policy type, and maximum claimable amount.
-- **Policy Purchase**: Customers can purchase a pre-defined insurance policy by paying the specified premium.
-- **Claim Process**: Insured customers can request and receive claim payouts upon verification.
-- **Claim Verification**: Policy creators verify and approve customer claims.
-- **Views for Policies**: Customers and creators can view policies based on ID, creator, or customer.
+1. **Create Rental Agreements**: Landlords can create rental agreements with tenants specifying rent, security deposits, and rental duration.
+2. **Rent Payments**: Tenants can pay rent directly through the contract, with payments recorded and history maintained.
+3. **Security Deposits**: Tenants make security deposits at the beginning of the rental period. Deposits are held in the landlord's custody or escrow until the end of the rental period.
+4. **Damage Deductions**: Landlords can propose deductions for damages, which must be agreed upon by the tenant before the deposit is refunded.
+5. **Refunds**: Once the rental period is over and any damage deductions are settled, the remaining security deposit is refunded to the tenant.
+6. **View Functions**: View rental agreements by landlord, tenant, or agreement ID. Also, view rent payment history, deductions, and active rentals.
 
-## Installation & Usage
+## Modules and Data Structures
 
-### 1. Initialize Global Policy System
+### Data Structures
 
-Before creating or managing policies, the global policy system must be initialized by invoking:
+- **RentalAgreement**: Represents a single rental agreement between a landlord and tenant. Contains rent amount, security deposit, duration, payment history, and deductions.
+- **RentPayment**: Stores rent payment details, including amount, payment time, and period.
+- **DamageDeduction**: Tracks deductions made for damages along with a description.
+- **GlobalRentalCollection**: A global collection of all rental agreements, along with the last used rental ID.
 
-```move
-init_global_policy_system(account: &signer)
-```
+### Error Codes
 
-This initializes a collection that will store all policies.
+- `ERR_RENTAL_NOT_FOUND`: Rental agreement with the provided ID was not found.
+- `ERR_UNAUTHORIZED`: Unauthorized action attempted by an incorrect user (tenant or landlord).
+- `ERR_NO_ACTIVE_RENTALS`: No active rentals available in the system.
+- `ERR_ALREADY_INITIALIZED`: The system has already been initialized.
+- `ERR_PAYMENT_OVERDUE`: Payment made for a period that has already been covered.
+- `ERR_NOT_TENANT`: Caller is not the tenant of the specified rental agreement.
+- `ERR_NOT_LANDLORD`: Caller is not the landlord of the specified rental agreement.
+- `ERR_DEPOSIT_NOT_MADE`: Security deposit has not been made yet.
+- `ERR_DEDUCTION_NOT_APPROVED`: Deductions proposed by the landlord have not been approved by the tenant.
+- `ERR_RENTAL_NOT_EXPIRED`: The rental agreement has not yet expired.
 
-### 2. Create a New Policy
+## Entry Functions
 
-Creators can define new policies with attributes such as description, premium amount, payment frequency, and claimable limits:
+### `init_rental_system(account: &signer)`
 
-```move
-create_policy(
-  account: &signer,
-  description: String,
-  premium_amount: u64,
-  yearly: bool,
-  max_claimable: u64,
-  type_of_policy: String
-)
-```
+Initializes the global rental system. This function should only be called once by the system admin.
 
-### 3. Purchase a Policy
+### `create_rental_agreement(account: &signer, tenant: address, rent_amount: u64, security_deposit: u64, duration_months: u64, agreement_type: String, agreement_description: String)`
 
-Users (customers) can purchase a policy by its unique ID. This action transfers the premium amount to the policy creator:
+Creates a new rental agreement between a landlord and tenant. The agreement specifies rent amount, security deposit, and duration.
 
-```move
-purchase_policy(account: &signer, policy_id: u64)
-```
+### `make_security_deposit(account: &signer, rental_id: u64)`
 
-### 4. Request a Claim
+Allows the tenant to make a security deposit for a specified rental agreement. The deposit is locked in the contract for the landlord's custody.
 
-After purchasing a policy, customers can request a claim under the policy:
+### `pay_rent(account: &signer, rental_id: u64)`
 
-```move
-request_claim(account: &signer, policy_id: u64)
-```
+Allows the tenant to make a rent payment. The rent amount is transferred to the landlord, and the payment is recorded.
 
-### 5. Verify a Claim
+### `propose_deductions(account: &signer, rental_id: u64, deduction_amount: u64, damage_description: String)`
 
-The policy creator must verify and approve a claim request:
+Allows the landlord to propose deductions from the security deposit for damages, along with a description of the damage.
 
-```move
-verify_claim(account: &signer, policy_id: u64, customer: address)
-```
+### `approve_deductions(account: &signer, rental_id: u64)`
 
-### 6. Payout for a Claim
+Allows the tenant to approve proposed deductions by the landlord. The deposit will not be refunded until these deductions are approved.
 
-Once a claim is verified, the policy creator can initiate the payout process, transferring the claimable amount to the customer:
+### `refund_security_deposit(account: &signer, rental_id: u64)`
 
-```move
-payout_claim(account: &signer, policy_id: u64)
-```
+Refunds the security deposit to the tenant after deducting any agreed damages. Can be called by either the landlord or tenant once the rental period is over.
 
-### 7. View All Policies
+## View Functions
 
-Retrieve a list of all policies in the system:
+These are non-mutating functions that allow viewing the state of the contract:
 
-```move
-view_all_policies(): vector<Policy>
-```
+### `view_all_rentals()`
 
-### 8. View Policy by ID
+Returns a list of all rental agreements in the system.
 
-Retrieve a specific policy by its ID:
+### `view_rental_by_id(rental_id: u64)`
 
-```move
-view_policy_by_id(policy_id: u64): Policy
-```
+Returns the details of a specific rental agreement by its ID.
 
-### 9. View Policies by Creator
+### `view_rentals_by_landlord(landlord: address)`
 
-Retrieve all policies created by a specific creator:
+Returns all rental agreements belonging to a specific landlord.
 
-```move
-view_policies_by_creator(creator: address): vector<Policy>
-```
+### `view_rentals_by_tenant(tenant: address)`
 
-### 10. View Policies by Customer
+Returns all rental agreements belonging to a specific tenant.
 
-Retrieve all policies a specific customer has purchased:
+### `view_active_rentals()`
 
-```move
-view_policies_by_customer(customer: address): vector<Policy>
-```
+Returns all currently active (non-expired) rental agreements.
 
-## Error Codes
+### `view_rent_payment_history(rental_id: u64)`
 
-- `ERR_POLICY_NOT_FOUND (1)`: The specified policy does not exist.
-- `ERR_NOT_CUSTOMER (2)`: The caller is not a customer of the policy.
-- `ERR_PREMIUM_NOT_PAID (3)`: The premium has not been paid for the policy.
-- `ERR_CLAIM_ALREADY_MADE (4)`: The claim has already been made.
-- `ERR_NO_POLICIES (5)`: No policies exist in the system.
-- `ERR_ALREADY_INITIALIZED (6)`: The global policy system has already been initialized.
-- `ERR_CLAIM_NOT_ALLOWED (7)`: The claim is not allowed (e.g., not verified).
-- `ERR_UNAUTHORIZED (8)`: The caller is not authorized to perform the action.
+Returns the payment history for a specific rental agreement.
 
-## Dependencies
+### `view_deductions(rental_id: u64)`
 
-- **AptosCoin**: The contract utilizes the native Aptos coin for premium payments and claim payouts.
-- **Std Modules**: Includes standard modules like `signer`, `string`, `vector`, and `coin`.
+Returns the deduction history for a specific rental agreement.
+
+## How to Deploy
+
+1. Ensure that the Aptos environment is set up with the appropriate tools and SDK.
+2. Compile and deploy the smart contract to the Aptos blockchain using the `move` CLI.
+3. Initialize the system by calling the `init_rental_system` function.
+
+## Usage
+
+- **Landlords**: Use the `create_rental_agreement` function to create agreements and `propose_deductions` to manage any damage-related costs.
+- **Tenants**: Use `make_security_deposit` to lock deposits and `pay_rent` for monthly payments.
+- Both parties can use `refund_security_deposit` at the end of the rental period to return any remaining deposit.
+
+## Future Enhancements
+
+- Multi-signature approval for damage deductions.
+- Automated reminders for rent payments.
+- Integration with an oracle for dynamic rent adjustments.
