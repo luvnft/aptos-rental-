@@ -11,16 +11,16 @@ export const config: Config = {
   },
 
   defaultCollection: {
-    name: "Lorem Ipsum",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue convallis augue in pharetra.",
+    name: "Rental Agreements",
+    description: "Secure and transparent rental agreements on the Aptos blockchain.",
     image: Placeholder1,
   },
 
   ourStory: {
     title: "Our Story",
-    subTitle: "Innovative Insurance Platform on Aptos",
+    subTitle: "Revolutionizing Rental Agreements on Aptos",
     description:
-      "Our Insurance Platform Offers Various Insurance Products to Protect Your Assets. We Provide a Secure and Transparent Platform for Buying and Selling Insurance. Join Our Community to Get Started!",
+      "Our platform offers a secure and transparent way to manage rental agreements and deposits. Join our community to experience the future of rental agreements!",
     discordLink: "https://discord.com",
     images: [Placeholder1, Placeholder2, Placeholder3],
   },
@@ -57,42 +57,33 @@ export const config: Config = {
 
     questions: [
       {
-        title: "What is Micro Insurance?",
+        title: "What is a Rental Agreement?",
         description:
-          "Micro insurance is a type of insurance designed to be affordable for low-income individuals or groups, providing coverage for specific risks such as health, life, or property.",
+          "A rental agreement is a contract between a landlord and a tenant that outlines the terms and conditions of the rental property.",
       },
       {
-        title: "How do I purchase an insurance policy?",
-        description: `To purchase an insurance policy, follow these steps:
-        Navigate to the "Buy Insurance" section in the app.
-        Select the type of insurance you need.
-        Fill in the required details and submit your application.
-        Make the payment through the available payment methods.
-        Confirm the transaction in your connected wallet.`,
+        title: "How do I create a rental agreement?",
+        description: `To create a rental agreement, follow these steps:
+        Navigate to the "Create Agreement" section in the app.
+        Fill in the required details about the property and the parties involved.
+        Submit the agreement for review.
+        Once approved, both parties can sign the agreement digitally.`,
       },
       {
-        title: "What types of insurance products are available?",
+        title: "How do I manage deposits?",
         description:
-          "We offer a variety of insurance products including health insurance, life insurance, and property insurance. Each product is tailored to meet the specific needs of our customers.",
+          "Our platform allows you to securely manage rental deposits. You can track deposit amounts, release deposits, and handle disputes all within the app.",
       },
       {
-        title: "How can I file a claim?",
-        description: `To file a claim, follow these steps:
-        Navigate to the "File a Claim" section in the app.
-        Provide the necessary details about the incident.
-        Submit any required documentation.
-        Our team will review your claim and get back to you with the next steps.`,
-      },
-      {
-        title: "What should I do if I encounter an issue with my policy?",
-        description: `If you encounter an issue with your policy, consider the following:
+        title: "What should I do if I encounter an issue with my agreement?",
+        description: `If you encounter an issue with your agreement, consider the following:
         Ensure that all your details are correctly entered.
-        Refresh the app and check your policy details again.
+        Refresh the app and check your agreement details again.
         Contact our support team for further assistance.`,
       },
       {
-        title: "How can I view my policy details?",
-        description: `You can view your policy details by navigating to the "My Policies" section of the app. This section will display all your active policies, including coverage details, premium amounts, and expiration dates.`,
+        title: "How can I view my agreements?",
+        description: `You can view your agreements by navigating to the "My Agreements" section of the app. This section will display all your active agreements, including terms, parties involved, and status.`,
       },
     ],
   },

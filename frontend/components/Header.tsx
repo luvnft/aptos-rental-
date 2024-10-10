@@ -15,7 +15,7 @@ export function Header() {
         {/* Header Title */}
         <Title level={screens.xs ? 3 : screens.sm ? 2 : 1} className="m-0">
           <Link to="/" style={{ fontFamily: "unset", color: "inherit" }}>
-            Aptos Insurance Platform
+            Aptos Rental Agreements Platform
           </Link>
         </Title>
       </Col>
@@ -25,15 +25,15 @@ export function Header() {
         <div className="flex gap-4 items-center justify-between">
           <Link
             className={`${buttonVariants({ variant: "link" })} w-24 text-center`} // Fixed width with center alignment
-            to={"/create-insurance"}
+            to={"/for-landlords"}
           >
-            Create Insurance
+            LandLords
           </Link>
           <Link
             className={`${buttonVariants({ variant: "link" })} w-24 text-center`} // Fixed width with center alignment
-            to={"/buy-insurance"}
+            to={"/for-tenants"}
           >
-            Buy Insurance
+            Tenants
           </Link>
           <div className="flex-shrink-0">
             <WalletSelector />
