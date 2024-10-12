@@ -247,13 +247,13 @@ export function CreateCollection() {
                   <Input placeholder="Enter tenant address" />
                 </Form.Item>
                 <Form.Item label="Rent Amount (APT)" name="rent_amount" rules={[{ required: true }]}>
-                  <InputNumber min={1} className="w-full" />
+                  <InputNumber className="w-full" />
                 </Form.Item>
                 <Form.Item label="Security Deposit (APT)" name="security_deposit" rules={[{ required: true }]}>
-                  <InputNumber min={1} className="w-full" />
+                  <InputNumber className="w-full" />
                 </Form.Item>
                 <Form.Item label="Duration (Months)" name="duration_months" rules={[{ required: true }]}>
-                  <InputNumber min={1} className="w-full" />
+                  <InputNumber className="w-full" />
                 </Form.Item>
 
                 <Form.Item name="agreement_type" label="Agreement Type" rules={[{ required: true }]}>
