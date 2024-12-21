@@ -5,9 +5,9 @@ import Placeholder3 from "@/assets/placeholders/bear-3.png";
 export const config: Config = {
   // Removing one or all of these socials will remove them from the page
   socials: {
-    twitter: "https://twitter.com/",
-    discord: "https://discord.com",
-    homepage: "/",
+    twitter: "https://twitter.com/cre_club",
+    discord: "https://discord.gg/VckXZUYHQg",
+    homepage: "https://rent.w3w.properties",
   },
 
   defaultCollection: {
