@@ -17,11 +17,11 @@ export const config: Config = {
   },
 
   ourStory: {
-    title: "Our Story",
-    subTitle: "Revolutionizing Rental Agreements on Aptos",
+    title: "Benefits",
+    subTitle: "Revolutionizing Rental Agreements on Aptos blockchain",
     description:
-      "Our platform offers a secure and transparent way to manage rental agreements and deposits. Join our community to experience the future of rental agreements!",
-    discordLink: "https://discord.com",
+      "Rent.w3w.properties Aptos rental agreements use technology to make rental processes more transparent, efficient, and secure. Automate rent payments, reduce disputes with clear, unchangeable contracts, and save time and money by eliminating the need for middlemen. Manage your rentals in our Discord.",
+    discordLink: "https://discord.gg/VckXZUYHQg",
     images: [Placeholder1, Placeholder2, Placeholder3],
   },
 
