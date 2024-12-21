@@ -20,10 +20,10 @@ export const config: Config = {
   },
 
   ourStory: {
-    title: "RENT",
-    subTitle: "Aptos blockchain renting benefits",
+    title: "®️ENT",
+    subTitle: "Easy as 1 2 3",
     description:
-      "Rent.w3w.properties Aptos rental agreements use technology to make rental processes more transparent, efficient, and secure. Automate rent payments, reduce disputes with clear, unchangeable contracts, and save time and money by eliminating the need for middlemen. Manage your rentals in our Discord.",
+      "Rent.w3w.properties Aptos rental agreements use blockchain technology to make rental processes more transparent, efficient, and secure. Automate rent payments, reduce disputes with clear, unchangeable contracts, and save time and money by eliminating the need for middlemen. Manage your rentals in our Discord.",
     discordLink: "https://discord.gg/VckXZUYHQg",
     images: [Placeholder1, Placeholder2, Placeholder3],
   },
