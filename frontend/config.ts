@@ -1,6 +1,9 @@
-import Placeholder1 from "@/assets/placeholders/bear-1.png";
-import Placeholder2 from "@/assets/placeholders/bear-2.png";
-import Placeholder3 from "@/assets/placeholders/bear-3.png";
+import Placeholder1 from "@/assets/placeholders/1.png";
+import Placeholder2 from "@/assets/placeholders/2.png";
+import Placeholder3 from "@/assets/placeholders/3.png";
+import Placeholder4 from "@/assets/placeholders/land-4.png";
+import Placeholder5 from "@/assets/placeholders/door-5.png";
+import Placeholder6 from "@/assets/placeholders/rent-6.png";
 
 export const config: Config = {
   // Removing one or all of these socials will remove them from the page
@@ -17,8 +20,8 @@ export const config: Config = {
   },
 
   ourStory: {
-    title: "Benefits",
-    subTitle: "Revolutionizing Rental Agreements on Aptos blockchain",
+    title: "RENT",
+    subTitle: "Aptos blockchain renting benefits",
     description:
       "Rent.w3w.properties Aptos rental agreements use technology to make rental processes more transparent, efficient, and secure. Automate rent payments, reduce disputes with clear, unchangeable contracts, and save time and money by eliminating the need for middlemen. Manage your rentals in our Discord.",
     discordLink: "https://discord.gg/VckXZUYHQg",
@@ -26,35 +29,28 @@ export const config: Config = {
   },
 
   ourTeam: {
-    title: "Our Team",
+    title: "W3W",
     members: [
       {
-        name: "Alex",
-        role: "Blockchain Developer",
-        img: Placeholder1,
-        socials: {
-          twitter: "https://twitter.com",
-        },
+        name: "What3Words App",
+        role: "3 Word Address",
+        img: Placeholder4,
       },
       {
-        name: "Jordan",
-        role: "Marketing Specialist",
-        img: Placeholder2,
+        name: "Experience",
+        role: "Simplifies check-in",
+        img: Placeholder5,
       },
       {
-        name: "Taylor",
-        role: "Community Manager",
-        img: Placeholder3,
-        socials: {
-          twitter: "https://twitter.com",
-        },
+        name: "Indoor Map",
+        role: "Pinpoints indoor locations",
+        img: Placeholder6,
       },
     ],
   },
 
   faqs: {
     title: "F.A.Q.",
-
     questions: [
       {
         title: "What is a Rental Agreement?",
