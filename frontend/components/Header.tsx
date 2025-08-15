@@ -15,7 +15,7 @@ export function Header() {
         {/* Header Title */}
         <Title level={screens.xs ? 3 : screens.sm ? 2 : 1} className="m-0">
           <Link to="/" style={{ fontFamily: "unset", color: "inherit" }}>
-           ®️ENT.W3W.PROPERTIES
+           LEASE.
           </Link>
         </Title>
       </Col>

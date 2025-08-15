@@ -8,9 +8,8 @@ import Placeholder6 from "@/assets/placeholders/rent-6.png";
 export const config: Config = {
   // Removing one or all of these socials will remove them from the page
   socials: {
-    twitter: "https://twitter.com/cre_club",
-    discord: "https://discord.gg/VckXZUYHQg",
-    homepage: "https://rent.w3w.properties",
+    twitter: "https://twitter.com/rntsocial",
+    homepage: "https://lease.rnt.social",
   },
 
   defaultCollection: {
@@ -20,11 +19,11 @@ export const config: Config = {
   },
 
   ourStory: {
-    title: "®️ENT",
+    title: "LEASE.",
     subTitle: "Easy as 1 2 3",
     description:
-      "Rent.w3w.properties Aptos rental agreements use blockchain technology to make rental processes more transparent, efficient, and secure. Automate rent payments, reduce disputes with clear, unchangeable contracts, and save time and money by eliminating the need for middlemen. Manage your rentals in our Discord.",
-    discordLink: "https://discord.gg/VckXZUYHQg",
+      "Lease. Aptos rental agreements use blockchain technology to make rental processes more transparent, efficient, and secure. Automate rent payments, reduce disputes with clear, unchangeable contracts, and save time and money by eliminating the need for middlemen.",
+    discordLink: "https://rnt.social",
     images: [Placeholder1, Placeholder2, Placeholder3],
   },
 
@@ -53,22 +52,22 @@ export const config: Config = {
     title: "F.A.Q.",
     questions: [
       {
-        title: "What is a Rental Agreement?",
+        title: "What is a Lease Agreement?",
         description:
-          "A rental agreement is a contract between a landlord and a tenant that outlines the terms and conditions of the rental property.",
+          "A lease agreement is a contract between a landlord and a tenant that outlines the terms and conditions of the rental property on blockchain for public transparency.",
       },
       {
-        title: "How do I create a rental agreement?",
-        description: `To create a rental agreement, follow these steps:
+        title: "How do I create a lease agreement?",
+        description: `To create a lease agreement, follow these steps:
         Navigate to the "Create Agreement" section in the app.
         Fill in the required details about the property and the parties involved.
-        Submit the agreement for review.
+        Submit the lease agreement for review.
         Once approved, both parties can sign the agreement digitally.`,
       },
       {
         title: "How do I manage deposits?",
         description:
-          "Our platform allows you to securely manage rental deposits. You can track deposit amounts, release deposits, and handle disputes all within the app.",
+          "Our platform allows you to securely manage lease rental deposits. You can track deposit amounts, release deposits, and handle disputes all within the app.",
       },
       {
         title: "What should I do if I encounter an issue with my agreement?",
@@ -78,8 +77,8 @@ export const config: Config = {
         Contact our support team for further assistance.`,
       },
       {
-        title: "How can I view my agreements?",
-        description: `You can view your agreements by navigating to the "My Agreements" section of the app. This section will display all your active agreements, including terms, parties involved, and status.`,
+        title: "How can I view my lease agreements?",
+        description: `You can view your lease agreements by navigating to the "My Agreements" section of the app. This section will display all your active agreements, including terms, parties involved, and status.`,
       },
     ],
   },

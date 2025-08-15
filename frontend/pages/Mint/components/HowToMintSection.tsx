@@ -3,7 +3,7 @@ interface HowToMintSectionProps {}
 export const HowToMintSection: React.FC<HowToMintSectionProps> = () => {
   return (
     <section className="w-full max-w-screen-xl px-4 mx-auto text-center how-to-mint-container">
-      <h2 className="heading-md">How To ®️ent</h2>
+      <h2 className="heading-md">How To LEASE.</h2>
 
       <ol className="flex flex-col items-center gap-6 pt-6 md:flex-row md:justify-between">
         {["Connect Your Wallet", "Create Agreement", "Deposit Money ヅ"].map((text, index) => (
